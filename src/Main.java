@@ -12,4 +12,13 @@ abstract class Tess{
 
 public class Main {
 
+    static int vdg(){
+        return 1;
+    }
+    void gettest(){
+        long test=01;
+        float fes=-412;
+        double dx=0x12345678;
+        vdg();
+    }
 }
