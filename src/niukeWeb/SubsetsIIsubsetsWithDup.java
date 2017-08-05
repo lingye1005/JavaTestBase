@@ -38,7 +38,7 @@ public class SubsetsIIsubsetsWithDup {
             int size = result.size();
             if (num[i] != num[i - 1]) {
                 //对于result中结果都获取一遍,最后增加一个num[i] ;再将这次新的到的所有数组存进result中
-                for (int j = size-1; j>0; j--) {
+                for (int j = size-1; j>=0; j--) {
                     temp = new ArrayList<Integer>(result.get(j));
                     temp.add(num[i]);
                     result.add(temp);
@@ -58,8 +58,9 @@ public class SubsetsIIsubsetsWithDup {
 
     public static void main(String[] args) {
         SubsetsIIsubsetsWithDup test=new SubsetsIIsubsetsWithDup();
-        int[] num={1,1,2};
+        int[] num={1,2,3};
         ArrayList<ArrayList<Integer>> a=test.subsetsWithDup(num);
+        System.out.println(a.size());
         System.out.println("111");
     }
 }
