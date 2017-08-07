@@ -1,38 +1,25 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * created by cxh on 17/7/27
  */
 
 class Base{
-    //静态语句块
-    static{
-        System.out.println("执行基类的静态语句块!");
-    }
-    //构造器方法
-    Base(){
-        System.out.println("执行基类的构造器方法!");
-    }
-    //构造器代码块
-    {
-        System.out.println("执行基类的构造代码块!");
-    }
+    private class a{}
+    protected class b{}
+    public class  c{}
+    class d{}
+
 }
 public class TempTest extends Base {
-    //静态语句块
-    static{
-        System.out.println("执行子类的静态语句块!");
-    }
-    //构造器方法
-    TempTest(){
-        System.out.println("执行子类的构造器方法!");
-    }
-    //构造器代码块
-    {
-        System.out.println("执行子类的构造代码块!");
-    }
-    public static void main(String[] args){
-        TempTest a=new TempTest();
-        System.out.println("----------------");
-        TempTest b=new TempTest();
+    public static void main(String[] args) {
+        List Listlist1 = new ArrayList();
+        Listlist1.add(0);
+        List Listlist2 = Listlist1;
+        System.out.println(Listlist1.get(0) instanceof Integer);
+        System.out.println(Listlist2.get(0) instanceof Integer);
+        Boolean.valueOf(true);
     }
 }
 
