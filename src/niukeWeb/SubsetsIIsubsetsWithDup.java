@@ -16,7 +16,6 @@ import java.util.Arrays;
          [1,2],
          []
      ]
- 没有ac,集合内结果是正确的,就是各个数组之间并没有排序.只是数组内部是排好序的.
  */
 public class SubsetsIIsubsetsWithDup {
     public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
@@ -63,18 +62,25 @@ public class SubsetsIIsubsetsWithDup {
          * 到达此处是,result结果集已经找到了,现在需要对子集进行排序
          * 基数排序
          */
-        int maxLen=result.get(result.size()-1).size();//基数排序最长比较位数
+        //int maxLen=result.get(result.size()-1).size();//基数排序最长比较位数,这种表达方式是有问题的,因为最长的子集不一定是result最后一个元素
+        int maxLen=-1;//基数排序最长比较位数
+        for(int i=0;i<result.size();i++){
+            if(maxLen<result.get(i).size())
+                maxLen=result.get(i).size();
+        }
         int groups=result.size();//需要被排序的组数
         int[][] budgets=new int[groups][maxLen];//记录各组每位出现的数值
         for(int i=0;i<groups;i++){
-            int index=maxLen-1;
-            for(int j=maxLen-1;j>=0;j--){
+            int index=0;
+            for(int j=0;j<maxLen;j++){
                 if(result.get(i).size()>j){
-                    budgets[i][index--]=result.get(i).get(j);  //从低位开始存放数据
+                    budgets[i][index++]=result.get(i).get(j);  //从低位开始存放数据
+                }else{
+                    budgets[i][index++]=Integer.MIN_VALUE;
                 }
             }
         }
-        for(int k=maxLen-1;k>=0;k--){  //每次各个组的比较都从最低位开始比较
+        for(int k=maxLen-1;k>=0;k--){  //每次各个组的比较都从最高位开始比较
             for(int i=0;i<groups-1;i++){
                 //按关键字: result[j][k]result[j+1][k]进行生序排序
                 boolean flag=false;//是否进行了交换
@@ -94,30 +100,12 @@ public class SubsetsIIsubsetsWithDup {
                     break;
             }
         }
-
-//        /**
-//         * 再按照子集长度排序;
-//         * 冒泡排序
-//         */
-//        for(int i=0;i<result.size();i++){
-//            boolean flag=false;
-//            for(int j=result.size()-1;j>i;j--){
-//                if(result.get(j-1).size()>result.get(j).size()){
-//                    ArrayList<Integer> arrays=result.get(j-1);
-//                    result.set(j-1,result.get(j));
-//                    result.set(j,arrays);
-//                    flag=true;
-//                }
-//            }
-//            if(!flag)
-//                break;
-//        }
         return  result;
     }
 
     public static void main(String[] args) {
         SubsetsIIsubsetsWithDup test=new SubsetsIIsubsetsWithDup();
-        int[] num={1,2,3};
+        int[] num={2,1,2,1,3};
         ArrayList<ArrayList<Integer>> a=test.subsetsWithDup(num);
         System.out.println(a.size());
         System.out.println("111");
