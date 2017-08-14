@@ -68,5 +68,6 @@ public class WordLadder {
         dict.add("log");dict.add("hig");
         test.ladderLength("hit","cog",dict);
         System.out.println(min);
+        Math.round(2);
     }
 }
