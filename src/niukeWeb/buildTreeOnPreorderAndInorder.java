@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by caoxiaohong on 17/6/18.
+ * 根据先序和中序生成一棵二叉树
  */
 public class buildTreeOnPreorderAndInorder {
     public TreeNode buildTree(int[] preorder, int[] inorder) {
@@ -27,4 +28,6 @@ public class buildTreeOnPreorderAndInorder {
         root.right=helper(preorder,startpre+(index-startin+1),inorder,index+1,endin,getIndex);
         return root;
     }
+
+
 }

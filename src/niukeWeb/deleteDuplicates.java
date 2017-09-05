@@ -3,7 +3,7 @@ package niukeWeb;
 
 /**
  * Created by caoxiaohong on 17/6/23.
- * 删除有序链表的相同元素
+ * 删除有序链表的相同元素,相同元素保留一个即可
  */
 public class deleteDuplicates {
     public ListNode deleteDuplicates(ListNode head) {

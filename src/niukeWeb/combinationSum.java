@@ -1,45 +1,36 @@
 package niukeWeb;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by caoxiaohong on 17/7/7.
+ * 当然,这道题已经ac了
+ * 刷题遇到问题:如果变量被声明为static类型,则会提示:算法超时.所以以后在牛客网写算法,注意不能声明static类型的变量.为什么,不太清楚.
  */
 public class combinationSum {
-    static  ArrayList<ArrayList<Integer>> result=new ArrayList<ArrayList<Integer>>();
+    ArrayList<ArrayList<Integer>> result=new ArrayList<ArrayList<Integer>>();
+    List<List<Integer>> list=new ArrayList<List<Integer>>();
     public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
-        int index=0;
         ArrayList<Integer> currResult=new ArrayList<Integer>();
         if(target<=0)
             return result;
         //数组排序,非递减
-        QuickSort(candidates,0,candidates.length-1);
+        Arrays.sort(candidates);
+        //QuickSort(candidates,0,candidates.length-1);
         helper(candidates,target,0,currResult,0);
         return result;
     }
-    //排序算法
-    void QuickSort(int[] num,int low,int high){
-        if(low<high) {  //开始忘记写if判定,出现栈溢出
-            int pivot = Partion(num, low, high);
-            QuickSort(num, low, pivot - 1);
-            QuickSort(num, pivot + 1, high);
-        }
-    }
-    int Partion(int[] num,int low,int high){
-        int pivot=num[low];
-        while(low<high){
-            while(low<high && num[high]>=pivot)
-                high--;
-            num[low]=num[high];
-            while(low<high && num[low]<=pivot)
-                low++;
-            num[high]=num[low];
-        }
-        num[low]=pivot;
-        return low;
-    }
 
-    //主算法
+    /**
+     * 主函数:dfs
+     * @param num 原数组
+     * @param target 目标和
+     * @param index 当前遍历下的数组下标
+     * @param currResult 当前遍历的临时结果集
+     * @param sum  当前遍历下的和
+     */
     private void helper(int[] num,int target,int index,ArrayList<Integer> currResult,int sum){
         if(target<sum)
             return ;
@@ -63,23 +54,23 @@ public class combinationSum {
 
             sum-=num[i];
             currResult.remove(currResult.size()-1);
-
-            //为防止有相同的组合
-            while(i+1<num.length && num[i]==num[i+1])  //不是太理解,比较难懂呃
-                i++;
         }
     }
 
+    /**
+     *  测试函数main
+     * @param args
+     */
     public static void main(String[] args) {
         combinationSum test=new combinationSum();
         int[] a={2,3,6,7};
         int t=7;
         test.combinationSum(a,t);
         //int count=0;
-        System.out.println(result.size());
-        for(int i=0;i<result.size();i++){
-            for(int j=0;j<result.get(i).size();j++){
-                System.out.print(result.get(i).get(j)+",");
+        System.out.println(test.result.size());
+        for(int i=0;i<test.result.size();i++){
+            for(int j=0;j<test.result.get(i).size();j++){
+                System.out.print(test.result.get(i).get(j)+",");
             }
             System.out.println();
         }

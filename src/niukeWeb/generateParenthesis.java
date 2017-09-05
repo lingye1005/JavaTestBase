@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by caoxiaohong on 17/7/12.
- * 给定数字n,表示可以表示的完整括号,然后列举出所有肯能的例子:
+ * 给定数字n,表示可以表示的完整括号,然后列举出所有可能的例子:
  * For example, given n = 3, a solution set is:
  * "((()))", "(()())", "(())()", "()(())", "()()()"
  */
@@ -43,7 +43,6 @@ public class generateParenthesis {
 
     public static void main(String[] args) {
         generateParenthesis test=new generateParenthesis();
-        test.generateParenthesis(5);
-
+        test.generateParenthesis(3);
     }
 }

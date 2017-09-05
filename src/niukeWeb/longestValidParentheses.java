@@ -1,46 +1,46 @@
 package niukeWeb;
 
 
+import java.util.Stack;
+
 /**
  * Created by caoxiaohong on 17/7/9.
  * 求最长连续的符号匹配
- * 算法未写完,有问题
+ * 找到第一个入栈元素"(",记录下标from;
+ * 遇到")",则出栈;判断:如果此时栈空,记录字符下标end;求出此子串的长度.
  */
 public class longestValidParentheses {
-    int max=0;
 
     public int longestValidParentheses(String s) {
+        if(s==null || s.length()<2)
+            return 0;
+        int max=0;
+        int last=-1;
+        Stack<Integer> stack=new Stack<Integer>();
         for(int i=0;i<s.length();i++){
-            int n=helper(s.substring(i,s.length()));
-            if(n>max)
-                max=n;
+            if(s.charAt(i)=='('){
+                stack.push(i);
+            }else{
+                if(stack.isEmpty()){
+                    last=i;
+                }else{
+                    stack.pop();
+                    if(stack.isEmpty()){
+                        max=Math.max(max,i-last);
+                    }else{
+                        max=Math.max(max,i-stack.peek());
+                    }
+                }
+            }
         }
         return max;
     }
 
-    
-    int helper(String s){
-        int temp=0;
-        StringBuilder sb=new StringBuilder();
-        //长度:1-len
-        sb.append(String.valueOf(s.charAt(0)));
-        for(int i=1;i<s.length();i++){
-            sb.append(String.valueOf(s.charAt(i)));
-            int length=sb.length();
-            if(length>1 && String.valueOf(sb.charAt(length-2)).equals("(") && String.valueOf(sb.charAt(length-1)).equals(")")){
-                temp+=2;
-                //去掉字符串后两个字符
-                String str=sb.substring(0,length-2);
-                sb=new StringBuilder();
-                sb.append(str);
-            }
-        }
-        return temp;
-    }
+
 
     public static void main(String[] args) {
         longestValidParentheses test=new longestValidParentheses();
-        String s="()(((((((((()";
+        String s=")()())";//()(() or )()())
         System.out.println(test.longestValidParentheses(s));
     }
 }
