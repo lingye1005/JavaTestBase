@@ -16,36 +16,36 @@ import java.util.ArrayList;
 public class Periods {
     public  long getLongest(int n, String s) {
         long sum=0;
-        char[] chars=s.toCharArray();
-        for(int i=1;i<n;i++){
-            sum+=getMaxRepeatWords(chars,i,i+1);//子串范围:0~i,包含边界
+        ArrayList<Integer> position=new ArrayList<Integer>();//记录出现s.charAt(0)的元素的位置
+        for(int i=n-1;i>0;i--){
+            if(s.charAt(i)==s.charAt(0))
+                position.add(i);
         }
-        return  sum;
-    }
-    private  int getMaxRepeatWords(char[] chars,int to,int n){
-        int from=n%2==0?n/2-1:n/2;
-        ArrayList<Integer> pos=new ArrayList<Integer>();
-        for(int i=to-1;i>=from;i--){
-            if(chars[0]==chars[i+1])//划分:0~i,i+1~to两个范围
-                pos.add(i+1);
-        }
-        if(pos.size()==0)
-            return 0;
-        for(int i:pos){
-            int idx1=0,idx2=i;
-            for(;idx2<n;idx1++,idx2++){
-                if(chars[idx1]!=chars[idx2])
-                   break;
+        int[] sums=new int[n];
+        for(int i=0;i<position.size();i++){
+            for(int k1=0,k2=position.get(i);k1<position.get(i) && k2<n;k1++,k2++){
+                if(s.charAt(k1)==s.charAt(k2)){
+                    /**如果之前sums[k2]之前已经被赋值过,则此处不会更新值.
+                     * 否则,sums[k2]没有被赋值过,初始值为0,此时会被重新赋值为position.get(i);
+                     * 这一步的思想比较重要
+                     */
+                    sums[k2]=sums[k2]>position.get(i)?sums[k2]:position.get(i);
+                }else{
+                    break;
+                }
             }
-            if(idx2==n)
-                return i;
         }
-        return to;
+        //求和
+        for(int i=0;i<n;i++)
+            sum+=sums[i];
+        return sum;
     }
+
 
     //test <code></code>
     public static void main(String[] args) {
         Periods t=new Periods();
-        System.out.println(t.getLongest(8,"babababa"));
+        String a="babababa";
+        System.out.println(t.getLongest(8,a));
     }
 }
