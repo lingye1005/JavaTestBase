@@ -11,23 +11,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
         Scanner scanner=new Scanner(System.in);//在线笔试
-        //求Math.pow(base,exp)的值
-        int base=scanner.nextInt();//底数
-        int exp=scanner.nextInt();//幂次
 
-        if(exp==0){
-            System.out.println(1); //任何数的0次幂结果都是1
-        }else{
-            int ret=1; //存放输出结果
-            while (exp>0){
-                if( (exp&1)==1 ){
-                    ret*=base;
-                }
-                base*=base;
-                exp=exp>>1; //不能直接写成exp>>1,会显示语法错误:not a statement.
-            }
-            System.out.println(ret);
-        }
     }
 }
 
