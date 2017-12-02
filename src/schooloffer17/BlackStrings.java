@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * Created by caoxiaohong on 17/11/12 12:50.
+ * <暗黑的字符串></>
  */
 public class BlackStrings {
     public static void main(String[] args) {
@@ -11,13 +12,12 @@ public class BlackStrings {
         int N;
         while (scanner.hasNext()){
             N=scanner.nextInt();//1 ≤ n ≤ 30
-            if(N==1){
-                System.out.println(3);
-            }else if(N==2){
-                System.out.println(9);
-            }else{
-                //System.out.println((int)(Math.pow(3,N)-6*(N-2)));
-            }
+            long[] dp=new long[N+1];
+            dp[1]=3;
+            dp[2]=9;
+            for(int i=3;i<=N;i++)
+                dp[i]=2*dp[i-1]+dp[i-2];
+            System.out.println(dp[N]);
         }
     }
 }
