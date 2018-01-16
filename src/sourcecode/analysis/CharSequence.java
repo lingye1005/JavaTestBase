@@ -27,13 +27,15 @@ import java.lang.*;
  * arbitrary <tt>CharSequence</tt> instances as elements in a set or as keys in
  * a map. </p>
  *
- * 这一接口,并没有改进Object类定义的equals()方法和hashCode()方法的通用规范.因此,对于两个实现了CharSequence接口的的对象,进行比较时,
- * 通常,其结果也是未定义的(因为对于继承了Object的类来说,根据具体的实现,比较时,是可以有两种选择的,要么比较地址,使用两个等号==,要么比较
- * 内容,使用equals.但是这个接口并没有定义equals方法,也没有用到通常我们做两个对象比较时,用到的equals方法和hashCode方法之间的关系,也就是
- * 你重写equals方法时,必须重写hashCode方法,这一点我之前在Object源码的分析中说过了).
- * 每个对象都可以由不同的类来实现,因此,我们无法保证每个类都有能和其他类实例测试等价性的能力.因此,使用任意的CharSequence实例作为set集合
- * 的元素或者map中的key,这种做法都是不合适的(为什么不合适呢?因为CharSequence实例是没有equals方法和hashCode方法的,这样的两个对象之间
- * 就无法完成比较,所以一旦被比较,出现什么结果都是不可控的,故不适合.).
+ * 这一接口,并没有提炼出Object类定义的equals()方法和hashCode()方法的通用规范(但是,像其他的接口,比如Map就有equals()方法和
+ * hashCode()方法,再比如,虽然List接口没有给出这两个方法,但是抽象类Abstract重新定义了这两个方法).因此,对于两个不仅实现了
+ * CharSequence接口的的对象(可能还继承了其他的类),进行比较时,通常,其结果也是未定义的(因为对于继承了Object的类来说,根据具体的实现,
+ * 比较时,是可以有两种选择的,要么比较地址,使用两个等号==,要么比较内容,使用equals.但是这个接口并没有定义equals方法,也没有用到通常我们
+ * 做两个对象比较时,用到的equals方法和hashCode方法之间的关系,也就是你重写equals方法时,必须重写hashCode方法,这一点我之前在Object
+ * 源码的分析中说过了).每个对象都可以由不同的类来实现,因此,我们无法保证每个类都有能和其他类实例测试等价性的能力.因此,使用任意的
+ * CharSequence实例作为set集合的元素或者map中的key,这种做法都是不合适的(为什么不合适呢?因为CharSequence实例是没有equals方法和
+ * hashCode方法的,所以对应的实例的比较就取决于其继承的类或者其他实现的接口,那么两个被比较的类如果因为继承的类或者实现的接口
+ * (并且对应继承的类或者接口都对equals和hashCode给出了自己的定义)不同,所以一旦被比较,出现什么结果都是不可控的,故不适合.).
  *
  * @author Mike McCloskey
  * @since 1.4

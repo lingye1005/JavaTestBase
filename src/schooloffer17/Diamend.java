@@ -1,5 +1,6 @@
 package schooloffer17;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -14,43 +15,46 @@ public class Diamend {
         String str;
         while (scanner.hasNext()){
             str=scanner.next();
-            if(!str.contains("A") || !str.contains("B") || !str.contains("C") || !str.contains("D") || !str.contains("E")){
-                System.out.println(0);
-                continue;
-            }
-            int len=str.length();//长度
+            int len=str.length();
 
-            int res=Integer.MIN_VALUE;
-
+            int res=0;
             for(int i=0;i<len;i++){
-                if(str.charAt(i)<65 || str.charAt(i)>69){
-                    continue;
+                int a=-1,b=-1,c=-1,d=-1,e=-1;//记录各个找到的位置
+                HashSet<Character> set=new HashSet<Character>();
+                if(str.charAt(i)>=65 && str.charAt(i)<=69){//找到第一个字母
+                    a=i;
+                    set.add(str.charAt(i));
+                    for(int j=i+1;;j++){
+                        if(j==i)
+                            break;
+                        if(j==len)
+                            j=0;
+                        if(b==-1 && str.charAt(j)>=65 && str.charAt(j)<=69 && !set.contains(str.charAt(j))) {
+                            b = j;
+                            set.add(str.charAt(j));
+                            continue;
+                        }else if(c==-1 && str.charAt(j)>=65 && str.charAt(j)<=69 && !set.contains(str.charAt(j))){
+                            c=j;
+                            set.add(str.charAt(j));
+                            continue;
+                        }else if(d==-1 && str.charAt(j)>=65 && str.charAt(j)<=69 && !set.contains(str.charAt(j))){
+                            d=j;
+                            set.add(str.charAt(j));
+                            continue;
+                        }else if(e==-1 && str.charAt(j)>=65 && str.charAt(j)<=69 && !set.contains(str.charAt(j))){
+                            e=j;
+                            set.add(str.charAt(j));
+                            break;
+                        }
+                    }
                 }
+                //更改最大值
+                if(e!=-1){
+                    if(a<e)
+                        res=Math.max(res,a+len-1-e);
+                    else
+                        res=Math.max(res,a-e-1);
 
-                int cnt1=-1,cnt2=-1,cnt3=-1,cnt4=-1,cnt5=-1;
-                int max=len;
-                for(int j=i;j<=max;j++){
-                    if(j==max){
-                        max=i;
-                        j=0;
-                    }
-                    if(cnt1==-1 && str.charAt(j)>=65 && str.charAt(j)<=69){
-                        cnt1=j;
-                    }else if(cnt2==-1 && str.charAt(j)>=65 && str.charAt(j)<=69){
-                        cnt2=j;
-                    }else if(cnt3==-1 && str.charAt(j)>=65 && str.charAt(j)<=69){
-                        cnt3=j;
-                    }else if(cnt4==-1 && str.charAt(j)>=65 && str.charAt(j)<=69){
-                        cnt4=j;
-                    }else if(cnt5==-1 && str.charAt(j)>=65 && str.charAt(j)<=69){
-                        cnt5=j;
-                        break;
-                    }
-                }
-                if(cnt1<cnt5){
-                    res=Math.max(res,len-cnt5-1+cnt1);
-                }else{
-                    res=Math.max(res,cnt1-cnt5-1);
                 }
             }
             System.out.println(res);
