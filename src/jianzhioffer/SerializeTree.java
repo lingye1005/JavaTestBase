@@ -36,7 +36,7 @@ public class SerializeTree {
         index++;
         TreeNode root=null;
         if(!str[index].equals("$")){
-                 root=new TreeNode(Integer.valueOf(str[index]));
+            root=new TreeNode(Integer.valueOf(str[index]));
             root.left=deSerialize(str);
             root.right=deSerialize(str);
         }

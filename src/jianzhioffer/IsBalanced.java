@@ -11,11 +11,11 @@ public class IsBalanced {
     }
     private boolean helper(TreeNode root){
         if(root!=null){
-            if(Math.abs(getDepth(root.left)-getDepth(root.right))>1)
-                return false;
-            else{
-                return  helper(root.left) && helper(root.right);
-            }
+                if(Math.abs(getDepth(root.left)-getDepth(root.right))>1)
+                    return false;
+                else{
+                    return  helper(root.left) && helper(root.right);
+                }
         }else{
             return true;
         }

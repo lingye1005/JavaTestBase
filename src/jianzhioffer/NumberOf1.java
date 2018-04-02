@@ -20,7 +20,7 @@ public class NumberOf1 {
         }else{
             count=1;
             ArrayList<Integer> list=new ArrayList<Integer>();//0~n位依次存储:从低位到高位的余数
-            n=0-n;//将n改为正数
+            n=(~n)+1;//将n改为正数
             while(n!=0){
                 list.add(n%2);
                 n=n/2;
@@ -53,6 +53,6 @@ public class NumberOf1 {
 
     public static void main(String[] args) {
         NumberOf1 test=new NumberOf1();
-        System.out.println(test.NumberOf1(-1));
+        System.out.println(test.NumberOf1(-2));//2147483648
     }
 }
